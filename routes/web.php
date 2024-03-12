@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\MachineController;
+use App\Http\Controllers\MachineTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +23,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('brands', App\Http\Controllers\BrandController::class);
-Route::resource('machine-types', App\Http\Controllers\MachineTypeController::class);
+Route::resource('brands', BrandController::class);
+Route::resource('machines', MachineController::class);
+Route::resource('machine-types', MachineTypeController::class);
