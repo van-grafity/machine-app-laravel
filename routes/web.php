@@ -23,8 +23,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::resource('brands', BrandController::class);
-Route::resource('machines', MachineController::class);
-Route::resource('machine-types', MachineTypeController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::resource('brands', BrandController::class);
+    Route::resource('machines', MachineController::class);
+    Route::resource('machine-types', MachineTypeController::class);
+});
