@@ -1,0 +1,58 @@
+.select2-container .select2-selection--single {
+    height: 38px; /* ganti tinggi ini sesuai keinginan */
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 36px;
+}
+
+.mt-10rem {
+    margin-top: 10rem;
+}
+
+.detail-section tr td {
+    padding-bottom: 10px;
+}
+
+/* mengubah warna border menjadi merah pada select2 setelah terjadi validasi error */
+.select2-container--default.select2-container--error .select2-selection {
+    border-color: #dc3545 !important;
+}
+
+.toggle-password {
+    width: 50px;
+    text-align: center;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    /* background-color: #3498db; */
+    border-radius: 50%;
+    display: inline-block;
+    animation: bounce 1s infinite alternate;
+}
+.dot-sm {
+    height: 10px;
+    width: 10px;
+}
+.dot-success {
+    background-color: #28a745;
+}
+
+.dot-on-progress {
+    background-color: #ffc107;
+}
+
+.printed-by {
+    font-size: 8px;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
+}
