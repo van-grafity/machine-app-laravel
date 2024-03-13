@@ -509,6 +509,21 @@ return [
                 ],
             ],
         ],
+        'Toastr' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '.\vendor\toastr\toastr.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '.\vendor\toastr\toastr.min.js',
+                ],
+            ],
+        ],
     ],
 
     /*
