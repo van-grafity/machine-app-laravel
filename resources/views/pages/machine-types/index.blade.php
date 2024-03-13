@@ -21,7 +21,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Action</th>
+                                        <th width="8%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -71,13 +71,7 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
-                    {
-                        data: null,
-                        render: function (data) {
-                            return '<button class="btn btn-primary btn-sm detail" data-id="' + data.id + '">Detail</button>' +
-                                '<button class="btn btn-danger btn-sm delete" data-id="' + data.id + '">Delete</button>';
-                        }
-                    }
+                    { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
                 order: [[0, 'asc']],
                 lengthChange: true,
@@ -92,13 +86,13 @@
             });
             
             // Show modal for detail
-            $('#machine_types_table').on('click', '.detail', function () {
+            $('#machine_types_table').on('click', '.btn-detail', function () {
                 var id = $(this).data('id');
                 showFormModal(false, id);
             });
 
             // Delete machine type
-            $('#machine_types_table').on('click', '.delete', function () {
+            $('#machine_types_table').on('click', '.btn-delete', function () {
                 var id = $(this).data('id');
                 deleteData(id);
             });
@@ -135,19 +129,56 @@
 
             // Function to delete data
             function deleteData(id) {
-                if (confirm('Are you sure you want to delete this machine type?')) {
+                confirmAction("Are you sure?", "You won't be able to revert this!", "warning", function() {
                     $.ajax({
-                        url: "{{ route('machine-types.destroy', '') }}" + '/' + id,
-                        type: 'DELETE',
+                        url: '{{ route('machine-types.destroy', '') }}/' + id,
+                        type: 'POST',
                         data: {
-                            _token: "{{ csrf_token() }}"
+                            '_method': 'DELETE',
+                            '_token': '{{ csrf_token() }}'
                         },
-                        success: function (response) {
-                            table.ajax.reload();
+                        success: function(data) {
+                            showAlert("Deleted!", "Your file has been deleted.", "success", function() {
+                                table.ajax.reload();
+                            });
+                        },
+                        error: function(data) {
+                            showAlert("Error!", "There is an error deleting the data.", "error");
                         }
                     });
-                }
+                });
             }
-        });
+
+             // Function to confirm action
+            function confirmAction(title, text, icon, callback) {
+                Swal.fire({
+                    title: title,
+                    text: text,
+                    icon: icon,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        callback();
+                    }
+                });
+            }
+
+            // Function to show alert
+            function showAlert(title, text, icon, callback = null) {
+                Swal.fire({
+                    title: title,
+                    text: text,
+                    icon: icon,
+                    confirmButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (callback && result.value) {
+                        callback();
+                    }
+                });
+            }
+            });
     </script>
 @endpush

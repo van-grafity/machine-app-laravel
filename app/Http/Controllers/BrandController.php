@@ -18,6 +18,10 @@ class BrandController extends Controller
         $brands = Brand::select('id', 'name')->get();
         if (request()->ajax()) {
             return datatables()->of($brands)
+                ->addColumn('action', function($brand) {
+                    return '<button type="button" class="btn btn-primary btn-sm btn-detail" data-id="' . $brand->id . '">Detail</button>
+                            <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' . $brand->id . '">Delete</button>';
+                })
                 ->toJson();
         }
         return view('pages.brands.index');
