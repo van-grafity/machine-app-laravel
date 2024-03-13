@@ -17,9 +17,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Created At</th>
-                                        <th>Updated At</th>
-                                        <th>Action</th>
+                                        <th width="8%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -69,15 +67,7 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
-                { data: 'created_at', name: 'created_at' },
-                { data: 'updated_at', name: 'updated_at' },
-                { 
-                    data: null,
-                    render: function(data, type, full, meta) {
-                        return `<button type="button" class="btn btn-info btn-sm btn-detail" data-id="${full.id}">Detail</button>
-                                <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="${full.id}">Delete</button>`;
-                    }
-                }
+                { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
             order: [[0, 'asc']],
             lengthChange: true,

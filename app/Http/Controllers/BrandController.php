@@ -15,23 +15,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $model = Brand::query();
+        $brands = Brand::select('id', 'name')->get();
         if (request()->ajax()) {
-            return datatables()->eloquent($model)
-                ->addColumn('action', function ($brand) {
-                    return view('pages.brands.action', [
-                        'brand' => $brand,
-                        'url_show' => route('brands.show', $brand->id),
-                        'url_destroy' => route('brands.destroy', $brand->id),
-                    ]);
-                })
-                ->editColumn('created_at', function ($brand) {
-                    return $brand->created_at ? with(new Carbon($brand->created_at))->format('d/m/Y') : Carbon::now();
-                })
-                ->editColumn('updated_at', function ($brand) {
-                    return $brand->updated_at ? with(new Carbon($brand->updated_at))->format('d/m/Y') : Carbon::now();
-                })
-                ->rawColumns(['action'])
+            return datatables()->of($brands)
                 ->toJson();
         }
         return view('pages.brands.index');
@@ -104,7 +90,7 @@ class BrandController extends Controller
             $brand = Brand::findOrFail($id);
             $brand->update([
                 'name' => $request->input('name'),
-                // Add other fields here if necessary
+                'updated_at' => Carbon::now(),
             ]);
 
             return redirect('brands')->with('success', 'Brand updated successfully');

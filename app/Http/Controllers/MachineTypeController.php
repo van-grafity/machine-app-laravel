@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\MachineType;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class MachineTypeController extends Controller
 {
@@ -12,9 +15,16 @@ class MachineTypeController extends Controller
      */
     public function index()
     {
-        return view('pages.machine-types.index', [
-            'machineTypes' => MachineType::all(),
-        ]);
+        $model = MachineType::select('id', 'name');
+        if (request()->ajax()) {
+            return datatables()->of($model)
+                ->addColumn('action', function($machineType) {
+                    return '<button type="button" class="btn btn-primary btn-sm btn-detail" data-id="' . $machineType->id . '">Detail</button>
+                            <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' . $machineType->id . '">Delete</button>';
+                })
+                ->toJson();
+        }
+        return view('pages.machine-types.index');
     }
 
     /**
@@ -30,7 +40,25 @@ class MachineTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            $machineType = new MachineType();
+            $machineType->name = $request->input('name');
+            $machineType->created_at = Carbon::now();
+            $machineType->updated_at = Carbon::now();
+            $machineType->save();
+
+            return redirect('machine-types')->with('success', 'Machine Type created successfully');
+        } catch (\Exception $e) {
+            return Redirect::back()->withInput()->withErrors(['error' => 'Failed to create machine type. Please try again later.']);
+        }
     }
 
     /**
@@ -38,7 +66,8 @@ class MachineTypeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $machineType = MachineType::findOrFail($id);
+        return response()->json($machineType);
     }
 
     /**
@@ -54,7 +83,25 @@ class MachineTypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            $machineType = MachineType::findOrFail($id);
+            $machineType->update([
+                'name' => $request->input('name'),
+                'updated_at' => Carbon::now(),
+            ]);
+
+            return redirect('machine-types')->with('success', 'Machine Type updated successfully');
+        } catch (\Exception $e) {
+            return Redirect::back()->withInput()->withErrors(['error' => 'Failed to update machine type. Please try again later.']);
+        }
     }
 
     /**
@@ -62,6 +109,13 @@ class MachineTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $machineType = MachineType::findOrFail($id);
+            $machineType->delete();
+
+            return response()->json(['success' => 'Machine Type deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete machine type. Please try again later.']);
+        }
     }
 }
