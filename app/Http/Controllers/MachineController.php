@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+
+use App\Models\Machine;
+use App\Models\MachineType;
+use App\Models\Brand;
 
 class MachineController extends Controller
 {
@@ -11,7 +17,19 @@ class MachineController extends Controller
      */
     public function index()
     {
-        //
+        $machines = Machine::select('id', 'model', 'serial_number', 'machine_type_id', 'brand_id')
+        ->with('machineType:id,name', 'brand:id,name')
+        ->get();
+        if (request()->ajax()) {
+            return datatables()->of($machines)
+                ->addIndexColumn()
+                ->addColumn('action', function($machine) {
+                    return '<button type="button" class="btn btn-primary btn-sm btn-detail" data-id="' . $machine->id . '">Detail</button>
+                            <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' . $machine->id . '">Delete</button>';
+                })
+                ->toJson();
+        }
+        return view('pages.machines.index');
     }
 
     /**
