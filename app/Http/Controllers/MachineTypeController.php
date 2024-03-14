@@ -18,6 +18,7 @@ class MachineTypeController extends Controller
         $model = MachineType::select('id', 'name');
         if (request()->ajax()) {
             return datatables()->of($model)
+                ->addIndexColumn()
                 ->addColumn('action', function($machineType) {
                     return '<button type="button" class="btn btn-primary btn-sm btn-detail" data-id="' . $machineType->id . '">Detail</button>
                             <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' . $machineType->id . '">Delete</button>';
@@ -41,7 +42,7 @@ class MachineTypeController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|unique:machine_types|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -66,8 +67,7 @@ class MachineTypeController extends Controller
      */
     public function show(string $id)
     {
-        $machineType = MachineType::findOrFail($id);
-        return response()->json($machineType);
+        // 
     }
 
     /**
@@ -75,7 +75,8 @@ class MachineTypeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $machineType = MachineType::findOrFail($id);
+        return response()->json($machineType);
     }
 
     /**

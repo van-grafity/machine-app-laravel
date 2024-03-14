@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -15,13 +15,24 @@
                     </div>
 
                     <div class="card-body">
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="table-responsive">
                             <table id="machine_types_table" class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th width="10%">No</th>
                                         <th>Name</th>
-                                        <th width="8%">Action</th>
+                                        <th width="14%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -69,8 +80,8 @@
                 serverSide: true,
                 ajax: "{{ route('machine-types.index') }}",
                 columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                    { data: 'name', name: 'name' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
                 order: [[0, 'asc']],
@@ -113,7 +124,7 @@
                     $modal.modal('show');
                 } else {
                     $.ajax({
-                        url: "{{ route('machine-types.show', '') }}" + '/' + id,
+                        url: "{{ url('machine-types') }}" + '/' + id + '/edit',
                         type: 'GET',
                         success: function (response) {
                             $form.append('<input type="hidden" name="_method" value="PUT">');

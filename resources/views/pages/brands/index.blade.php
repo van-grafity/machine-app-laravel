@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -11,13 +11,24 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="table-responsive">
                             <table id="brands_table" class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th width="10%">No</th>
                                         <th>Name</th>
-                                        <th width="8%">Action</th>
+                                        <th width="14%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -65,7 +76,7 @@
             serverSide: true,
             ajax: '{{ route('brands.index') }}',
             columns: [
-                { data: 'id', name: 'id' },
+                { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                 { data: 'name', name: 'name' },
                 { data: 'action', name: 'action', orderable: false, searchable: false }
             ],
@@ -112,12 +123,14 @@
                 $form.attr('action', '{{ route('brands.update', '') }}/' + id);
                 $title.text('Edit Brand');
                 $btn.text('Update');
-
-                $.get('{{ route('brands.show', '') }}/' + id, function(data) {
-                    $name.val(data.name);
+                $.ajax({
+                    url: '{{ url('brands') }}/' + id + '/edit',
+                    type: 'GET',
+                    success: function(response) {
+                        $name.val(response.name);
+                    }
                 });
             }
-
             $modal.modal('show');
         }
 

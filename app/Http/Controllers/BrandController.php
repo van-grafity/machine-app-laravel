@@ -18,6 +18,7 @@ class BrandController extends Controller
         $brands = Brand::select('id', 'name')->get();
         if (request()->ajax()) {
             return datatables()->of($brands)
+                ->addIndexColumn()
                 ->addColumn('action', function($brand) {
                     return '<button type="button" class="btn btn-primary btn-sm btn-detail" data-id="' . $brand->id . '">Detail</button>
                             <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' . $brand->id . '">Delete</button>';
@@ -41,7 +42,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|unique:brands|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -49,15 +50,14 @@ class BrandController extends Controller
         }
 
         try {
-            $brand = Brand::create([
-                'name' => $request->input('name'),
-            ]);
+            $brand = new Brand();
+            $brand->name = $request->input('name');
+            $brand->save();
 
             return redirect('brands')->with('success', 'Brand created successfully');
         } catch (\Exception $e) {
             return Redirect::back()->withInput()->withErrors(['error' => 'Failed to create brand. Please try again later.']);
         }
-        
     }
 
     /**
@@ -65,8 +65,7 @@ class BrandController extends Controller
      */
     public function show(string $id)
     {
-        $brand = Brand::find($id);
-        return response()->json($brand, 200);
+        //
     }
 
     /**
@@ -74,7 +73,8 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $brand = Brand::find($id);
+        return response()->json($brand, 200);
     }
 
     /**
@@ -97,9 +97,8 @@ class BrandController extends Controller
                 'updated_at' => Carbon::now(),
             ]);
 
-            return redirect('brands')->with('success', 'Brand updated successfully');
+            return redirect()->route('brands.index')->with('success', 'Brand updated successfully');
         } catch (\Exception $e) {
-            // Log the error or handle it appropriately
             return Redirect::back()->withInput()->withErrors(['error' => 'Failed to update brand. Please try again later.']);
         }
     }
