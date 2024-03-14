@@ -93,7 +93,12 @@
                     { data: 'machine_type.name', name: 'machine_type.name' },
                     { data: 'brand.name', name: 'brand.name' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
-                ]
+                ],
+                order: [[0, 'asc']],
+                lengthChange: true,
+                searching: true,
+                autoWidth: false,
+                responsive: true
             });
         });
     </script>
