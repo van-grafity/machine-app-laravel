@@ -337,6 +337,61 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        // Machine
+        [
+            'text'    => 'Machine',
+            'icon'    => 'fas fa-fw fa-cogs',
+            'submenu' => [
+                [
+                    'text' => 'Machine',
+                    'url'  => 'machines',
+                ],
+                [
+                    'text' => 'Machine Status',
+                    'url'  => 'machine-statuses',
+                ],
+                [
+                    'text' => 'Machine Location',
+                    'url'  => 'machine-locations',
+                ],
+                [
+                    'text' => 'Machine Maintenance',
+                    'url'  => 'machine-maintenances',
+                ],
+                [
+                    'text' => 'Machine Maintenance Status',
+                    'url'  => 'machine-maintenance-statuses',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'User',
+            'icon'    => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'User',
+                    'url'  => 'users',
+                ],
+                [
+                    'text' => 'Role',
+                    'url'  => 'roles',
+                ],
+                [
+                    'text' => 'Permission',
+                    'url'  => 'permissions',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'Report',
+            'icon'    => 'fas fa-fw fa-chart-bar',
+            'submenu' => [
+                [
+                    'text' => 'Machine Maintenance Report',
+                    'url'  => 'machine-maintenance-reports',
+                ],
+            ],
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
