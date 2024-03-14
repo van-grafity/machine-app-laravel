@@ -19,12 +19,12 @@
                             <table id="machines_table" class="table table-hover table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th width="10%">No</th>
+                                        <th width="2%">No</th>
                                         <th>Model</th>
                                         <th>Serial Number</th>
                                         <th>Machine Type</th>
                                         <th>Brand</th>
-                                        <th width="14%">Action</th>
+                                        <th width="8%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
