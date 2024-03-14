@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <h3 class="card-title mb-0">Machines</h3>
                         <div class="card-tools d-flex">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_machine" id="btn_add">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_machine" id="btn_add">
                                 Add Machine
                             </button>
                         </div>

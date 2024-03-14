@@ -24,8 +24,8 @@ class MachineController extends Controller
             return datatables()->of($machines)
                 ->addIndexColumn()
                 ->addColumn('action', function($machine) {
-                    return '<button type="button" class="btn btn-primary btn-sm btn-detail" data-id="' . $machine->id . '">Detail</button>
-                            <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' . $machine->id . '">Delete</button>';
+                    return '<a href="javascript:void(0)" class="btn btn-primary btn-sm btn-edit" data-id="' . $machine->id . '"><i class="fas fa-edit"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-delete" data-id="' . $machine->id . '"><i class="fas fa-trash"></i></a>';
                 })
                 ->toJson();
         }

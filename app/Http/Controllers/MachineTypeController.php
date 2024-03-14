@@ -20,8 +20,8 @@ class MachineTypeController extends Controller
             return datatables()->of($model)
                 ->addIndexColumn()
                 ->addColumn('action', function($machineType) {
-                    return '<button type="button" class="btn btn-primary btn-sm btn-detail" data-id="' . $machineType->id . '">Detail</button>
-                            <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' . $machineType->id . '">Delete</button>';
+                    return '<a href="javascript:void(0)" class="btn btn-primary btn-sm btn-edit" data-id="' . $machineType->id . '"><i class="fas fa-edit"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-delete" data-id="' . $machineType->id . '"><i class="fas fa-trash"></i></a>';
                 })
                 ->toJson();
         }

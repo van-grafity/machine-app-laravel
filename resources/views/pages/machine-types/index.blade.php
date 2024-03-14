@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <h3 class="card-title mb-0">Machine Types</h3>
                         <div class="card-tools d-flex">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_machine_type" id="btn_add">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_machine_type" id="btn_add">
                                 Add Machine Type
                             </button>
                         </div>
@@ -97,7 +97,7 @@
             });
             
             // Show modal for detail
-            $('#machine_types_table').on('click', '.btn-detail', function () {
+            $('#machine_types_table').on('click', '.btn-edit', function () {
                 var id = $(this).data('id');
                 showFormModal(false, id);
             });

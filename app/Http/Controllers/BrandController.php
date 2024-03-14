@@ -20,8 +20,8 @@ class BrandController extends Controller
             return datatables()->of($brands)
                 ->addIndexColumn()
                 ->addColumn('action', function($brand) {
-                    return '<button type="button" class="btn btn-primary btn-sm btn-detail" data-id="' . $brand->id . '">Detail</button>
-                            <button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' . $brand->id . '">Delete</button>';
+                    return '<a href="javascript:void(0)" class="btn btn-primary btn-sm btn-edit" data-id="' . $brand->id . '"><i class="fas fa-edit"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-danger btn-sm btn-delete" data-id="' . $brand->id . '"><i class="fas fa-trash"></i></a>';
                 })
                 ->toJson();
         }

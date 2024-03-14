@@ -88,13 +88,13 @@
         });
         
         // Show modal for add
-        $('.card-tools').append('<button type="button" class="btn btn-primary" id="btn_add">Add Brand</button>');
+        $('.card-tools').append('<button type="button" class="btn btn-success" id="btn_add">Add Brand</button>');
         $('#btn_add').on('click', function() {
             showModal(true);
         });
 
         // Show modal for detail
-        $('#brands_table').on('click', '.btn-detail', function() {
+        $('#brands_table').on('click', '.btn-edit', function() {
             var id = $(this).data('id');
             showModal(false, id);
         });
