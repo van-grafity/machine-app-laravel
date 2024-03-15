@@ -8,9 +8,9 @@
                     <div class="card-header">
                         <h3 class="card-title mb-0">Machines</h3>
                         <div class="card-tools d-flex">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_machine" id="btn_add">
-                                Add Machine
-                            </button>
+                            <a href="{{ route('machines.create') }}" class="btn btn-success btn-sm">
+                                <i class="fas fa-plus"></i> Create Machine
+                            </a>
                         </div>
                     </div>
 
@@ -99,6 +99,62 @@
                 searching: true,
                 autoWidth: false,
                 responsive: true
+            });
+
+            @if(session('success'))
+                Swal.fire({
+                    title: 'Success',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if(session('error'))
+                Swal.fire({
+                    title: 'Error',
+                    text: '{{ session('error') }}',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            $('#machines_table').on('click', '.delete-machine', function () {
+                var id = $(this).data('id');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('machines.destroy', '') }}/" + id,
+                        data: {
+                            "_method": 'DELETE',
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function (data) {
+                            table.draw();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            );
+                        },
+                        error: function (data) {
+                            console.log('Error:', data);
+                            Swal.fire(
+                                'Error!',
+                                'Something went wrong',
+                                'error'
+                            );
+                        }
+                    });
+                });
             });
         });
     </script>
