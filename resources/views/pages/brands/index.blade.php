@@ -88,7 +88,7 @@
         });
         
         // Show modal for add
-        $('.card-tools').append('<button type="button" class="btn btn-success" id="btn_add">Add Brand</button>');
+        $('.card-tools').append('<button type="button" class="btn btn-success btn-sm" id="btn_add"> <i class="fas fa-plus"></i> Add Brand </button>');
         $('#btn_add').on('click', function() {
             showModal(true);
         });

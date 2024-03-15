@@ -8,8 +8,8 @@
                     <div class="card-header">
                         <h3 class="card-title mb-0">Machine Types</h3>
                         <div class="card-tools d-flex">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_machine_type" id="btn_add">
-                                Add Machine Type
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_machine_type" id="btn_add">
+                                <i class="fas fa-plus"></i> Add Machine Type
                             </button>
                         </div>
                     </div>
