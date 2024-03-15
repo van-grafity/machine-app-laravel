@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('machine_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('machine_id')->constrained()->onDelete('cascade');
+            $table->enum('status', ['ready', 'in_use', 'broken'])->default('ready');
+            $table->timestamp('status_date');
+            $table->string('service_mechanic')->nullable();
+            $table->boolean('spare_part_required')->default(false);
             $table->timestamps();
         });
     }

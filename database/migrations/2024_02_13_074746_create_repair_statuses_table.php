@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('machines', function (Blueprint $table) {
+        Schema::create('repair_statuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('machine_type_id')->constrained();
-            $table->foreignId('brand_id')->constrained();
-            $table->string('model');
-            $table->string('serial_number');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('machines');
+        Schema::dropIfExists('statuses');
     }
 };

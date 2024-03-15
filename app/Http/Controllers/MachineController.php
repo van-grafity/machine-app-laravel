@@ -18,7 +18,7 @@ class MachineController extends Controller
     public function index()
     {
         $machines = Machine::select('id', 'model', 'serial_number', 'machine_type_id', 'brand_id')
-        ->with('machineType:id,name', 'brand:id,name')
+        ->with('type:id,name', 'brand:id,name')
         ->get();
         if (request()->ajax()) {
             return datatables()->of($machines)

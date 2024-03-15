@@ -90,7 +90,7 @@
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                     { data: 'model', name: 'model' },
                     { data: 'serial_number', name: 'serial_number' },
-                    { data: 'machine_type.name', name: 'machine_type.name' },
+                    { data: 'type.name', name: 'type.name' },
                     { data: 'brand.name', name: 'brand.name' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
