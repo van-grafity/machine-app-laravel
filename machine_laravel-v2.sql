@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 15, 2024 at 03:50 AM
+-- Generation Time: Mar 15, 2024 at 03:57 AM
 -- Server version: 8.0.33
 -- PHP Version: 8.2.8
 
@@ -100,6 +100,44 @@ CREATE TABLE `locations` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `locations`
+--
+
+INSERT INTO `locations` (`id`, `name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'A1', 'Sewing Line#1 Factory A', NULL, NULL),
+(2, 'A2', 'Sewing Line#2 Factory A', NULL, NULL),
+(3, 'A3', 'Sewing Line#3 Factory A', NULL, NULL),
+(4, 'A4', 'Sewing Line#4 Factory A', NULL, NULL),
+(5, 'A5', 'Sewing Line#5 Factory A', NULL, NULL),
+(6, 'A6', 'Sewing Line#6 Factory A', NULL, NULL),
+(7, 'A7', 'Sewing Line#7 Factory A', NULL, NULL),
+(8, 'A8', 'Sewing Line#8 Factory A', NULL, NULL),
+(9, 'A9', 'Sewing Line#9 Factory A', NULL, NULL),
+(10, 'A10', 'Sewing Line#10 Factory A', NULL, NULL),
+(11, 'A11', 'Sewing Line#11 Factory A', NULL, NULL),
+(12, 'A12', 'Sewing Line#12 Factory A', NULL, NULL),
+(13, 'A13', 'Sewing Line#13 Factory A', NULL, NULL),
+(14, 'A14', 'Sewing Line#14 Factory A', NULL, NULL),
+(15, 'A15', 'Sewing Line#15 Factory A', NULL, NULL),
+(16, 'A16', 'Sewing Line#16 Factory A', NULL, NULL),
+(17, 'B1', 'Sewing Line#1 Factory B', NULL, NULL),
+(18, 'B2', 'Sewing Line#2 Factory B', NULL, NULL),
+(19, 'B3', 'Sewing Line#3 Factory B', NULL, NULL),
+(20, 'B4', 'Sewing Line#4 Factory B', NULL, NULL),
+(21, 'B5', 'Sewing Line#5 Factory B', NULL, NULL),
+(22, 'B6', 'Sewing Line#6 Factory B', NULL, NULL),
+(23, 'B7', 'Sewing Line#7 Factory B', NULL, NULL),
+(24, 'B8', 'Sewing Line#8 Factory B', NULL, NULL),
+(25, 'B9', 'Sewing Line#9 Factory B', NULL, NULL),
+(26, 'B10', 'Sewing Line#10 Factory B', NULL, NULL),
+(27, 'B11', 'Sewing Line#11 Factory B', NULL, NULL),
+(28, 'B12', 'Sewing Line#12 Factory B', NULL, NULL),
+(29, 'B13', 'Sewing Line#13 Factory B', NULL, NULL),
+(30, 'B14', 'Sewing Line#14 Factory B', NULL, NULL),
+(31, 'B15', 'Sewing Line#15 Factory B', NULL, NULL),
+(32, 'B16', 'Sewing Line#16 Factory B', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2255,7 +2293,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `machines`
